@@ -76,13 +76,13 @@ pipeline {
             }
         }
 
-        stage('Test Timeout') {
-            steps {
-                script {
-                    sleep 1 // This stage is for testing purposes; adjust as needed
-                }
-            }
-        }
+        // stage('Test Timeout') {
+        //     steps {
+        //         script {
+        //             sleep 1 // This stage is for testing purposes; adjust as needed
+        //         }
+        //     }
+        // }
     }
 }
 
