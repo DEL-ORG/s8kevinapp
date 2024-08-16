@@ -96,10 +96,11 @@ pipeline {
             }
         }
 
-    def sanity_check() {
-        if (params.BRANCH_NAME.isEmpty()) {
-            error "The parameter BRANCH_NAME is not set"
+}
+def sanity_check() {
+    if (params.BRANCH_NAME.isEmpty()) {
+        error "The parameter BRANCH_NAME is not set"
     }
 }
-}
+
 
