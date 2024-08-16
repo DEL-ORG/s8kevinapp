@@ -7,7 +7,6 @@ pipeline {
 
     environment {
         DOCKER_HUB_USERNAME = "devopseasylearning"
-        WEB_APP = "vag-app"
         DOCKER_CREDENTIAL_ID = 's8-test-docker-hub-auth'
     }
 
@@ -39,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Building Vagrant App') {
+        stage('Building Docker Images') {
             when {
                 expression { params.BRANCH_NAME == 'main' }
             }
@@ -47,6 +46,7 @@ pipeline {
                 script {
                     sh """
                         docker build -t ${env.DOCKER_HUB_USERNAME}/app-01:${BUILD_NUMBER} .
+                        docker build -t ${env.DOCKER_HUB_USERNAME}/s8-sonar-scanner-app:latest .
                         docker images
                     """
                 }
@@ -76,13 +76,13 @@ pipeline {
             }
         }
 
-        // stage('Test Timeout') {
-        //     steps {
-        //         script {
-        //             sleep 1 // This stage is for testing purposes; adjust as needed
-        //         }
-        //     }
-        // }
+        stage('Test Timeout') {
+            steps {
+                script {
+                    sleep 1 // This stage is for testing purposes; adjust as needed
+                }
+            }
+        }
     }
 }
 
